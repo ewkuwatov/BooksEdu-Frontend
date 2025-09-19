@@ -1,0 +1,50 @@
+.universitiesStatsContainer {
+  width: 1440px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+.universitiesStatsTitle {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.universitiesStatsTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.universitiesStatsHeader,
+.universitiesStatsRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.universitiesStatsHeader {
+  font-weight: 600;
+  background: #f9f9f9;
+  border-radius: 8px 8px 0 0;
+}
+
+.universitiesStatsRow:nth-child(even) {
+  background: #fdfdfd;
+}
+
+.infoText {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .universitiesStatsContainer {
+    display: none;
+  }
+}
