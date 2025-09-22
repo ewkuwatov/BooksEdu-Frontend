@@ -6,6 +6,7 @@ import img from '../assets/b64d65c9f5815f60cbae1a4fca79bb34.jpeg'
 
 import '../styles/OurNumbers.css'
 
+
 const OurNumbers = () => {
   const { t } = useTranslation()
   const { user } = useContext(AuthContext)
