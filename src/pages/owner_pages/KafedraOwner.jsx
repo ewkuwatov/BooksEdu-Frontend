@@ -124,7 +124,7 @@ const KafedraOwner = () => {
       </button>
 
       {openedKafedraForm && (
-        <div className="form-container">
+        <div className="modal-overlay">
           <form
             className="kafedra-form"
             onSubmit={editingId ? handleEditKafedra : handleAddKafedras}

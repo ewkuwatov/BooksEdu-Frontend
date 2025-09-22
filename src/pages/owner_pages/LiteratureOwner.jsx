@@ -142,144 +142,154 @@ const LiteartureOwner = () => {
           </button>
         )}
         {openForm && (
-          <form className="literature-form" onSubmit={handleAddLiteratures}>
-            <input
-              type="text"
-              placeholder="Title"
-              value={formLit.title}
-              onChange={(e) =>
-                setFormLit({ ...formLit, title: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Kind"
-              value={formLit.kind}
-              onChange={(e) => setFormLit({ ...formLit, kind: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="Author"
-              value={formLit.author}
-              onChange={(e) =>
-                setFormLit({ ...formLit, author: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              placeholder="Publisher"
-              value={formLit.publisher}
-              onChange={(e) =>
-                setFormLit({ ...formLit, publisher: e.target.value })
-              }
-            />
+          <div className="modal-overlay">
+            <form className="literature-form" onSubmit={handleAddLiteratures}>
+              <input
+                type="text"
+                placeholder="Title"
+                value={formLit.title}
+                onChange={(e) =>
+                  setFormLit({ ...formLit, title: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Kind"
+                value={formLit.kind}
+                onChange={(e) =>
+                  setFormLit({ ...formLit, kind: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Author"
+                value={formLit.author}
+                onChange={(e) =>
+                  setFormLit({ ...formLit, author: e.target.value })
+                }
+              />
+              <input
+                type="text"
+                placeholder="Publisher"
+                value={formLit.publisher}
+                onChange={(e) =>
+                  setFormLit({ ...formLit, publisher: e.target.value })
+                }
+              />
 
-            {/* University */}
-            <Dropdown
-              label="University"
-              value={
-                universities.find((u) => u.id === formLit.university_id)?.name
-              }
-              options={universities.map((u) => ({
-                value: u.id,
-                label: u.name,
-              }))}
-              onSelect={(val) => setFormLit({ ...formLit, university_id: val })}
-              openKey="university"
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}
-            />
+              {/* University */}
+              <Dropdown
+                label="University"
+                value={
+                  universities.find((u) => u.id === formLit.university_id)?.name
+                }
+                options={universities.map((u) => ({
+                  value: u.id,
+                  label: u.name,
+                }))}
+                onSelect={(val) =>
+                  setFormLit({ ...formLit, university_id: val })
+                }
+                openKey="university"
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+              />
 
-            {/* Subject */}
-            <Dropdown
-              label="Subject"
-              value={subjects.find((s) => s.id === formLit.subject_id)?.name}
-              options={filteredSubjects.map((s) => ({
-                value: s.id,
-                label: s.name,
-              }))}
-              onSelect={(val) => setFormLit({ ...formLit, subject_id: val })}
-              openKey="subject"
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}
-            />
+              {/* Subject */}
+              <Dropdown
+                label="Subject"
+                value={subjects.find((s) => s.id === formLit.subject_id)?.name}
+                options={filteredSubjects.map((s) => ({
+                  value: s.id,
+                  label: s.name,
+                }))}
+                onSelect={(val) => setFormLit({ ...formLit, subject_id: val })}
+                openKey="subject"
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+              />
 
-            {/* Language */}
-            <Dropdown
-              label="Language"
-              value={formLit.language}
-              options={Object.values(LanguageEnum).map((l) => ({
-                value: l,
-                label: l,
-              }))}
-              onSelect={(val) => setFormLit({ ...formLit, language: val })}
-              openKey="language"
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}
-            />
+              {/* Language */}
+              <Dropdown
+                label="Language"
+                value={formLit.language}
+                options={Object.values(LanguageEnum).map((l) => ({
+                  value: l,
+                  label: l,
+                }))}
+                onSelect={(val) => setFormLit({ ...formLit, language: val })}
+                openKey="language"
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+              />
 
-            {/* Font type */}
-            <Dropdown
-              label="Font type"
-              value={formLit.font_type}
-              options={Object.values(FontTypeEnum).map((ft) => ({
-                value: ft,
-                label: ft,
-              }))}
-              onSelect={(val) => setFormLit({ ...formLit, font_type: val })}
-              openKey="font_type"
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}
-            />
+              {/* Font type */}
+              <Dropdown
+                label="Font type"
+                value={formLit.font_type}
+                options={Object.values(FontTypeEnum).map((ft) => ({
+                  value: ft,
+                  label: ft,
+                }))}
+                onSelect={(val) => setFormLit({ ...formLit, font_type: val })}
+                openKey="font_type"
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+              />
 
-            {/* Condition */}
-            <Dropdown
-              label="Condition"
-              value={formLit.condition}
-              options={Object.values(ConditionEnum).map((c) => ({
-                value: c,
-                label: c,
-              }))}
-              onSelect={(val) => setFormLit({ ...formLit, condition: val })}
-              openKey="condition"
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}
-            />
+              {/* Condition */}
+              <Dropdown
+                label="Condition"
+                value={formLit.condition}
+                options={Object.values(ConditionEnum).map((c) => ({
+                  value: c,
+                  label: c,
+                }))}
+                onSelect={(val) => setFormLit({ ...formLit, condition: val })}
+                openKey="condition"
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+              />
 
-            {/* Usage status */}
-            <Dropdown
-              label="Usage status"
-              value={formLit.usage_status}
-              options={Object.values(UsageStatusEnum).map((s) => ({
-                value: s,
-                label: s,
-              }))}
-              onSelect={(val) => setFormLit({ ...formLit, usage_status: val })}
-              openKey="usage_status"
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}
-            />
+              {/* Usage status */}
+              <Dropdown
+                label="Usage status"
+                value={formLit.usage_status}
+                options={Object.values(UsageStatusEnum).map((s) => ({
+                  value: s,
+                  label: s,
+                }))}
+                onSelect={(val) =>
+                  setFormLit({ ...formLit, usage_status: val })
+                }
+                openKey="usage_status"
+                openDropdown={openDropdown}
+                setOpenDropdown={setOpenDropdown}
+              />
 
-            <input
-              type="number"
-              placeholder="Year"
-              value={formLit.year}
-              onChange={(e) => setFormLit({ ...formLit, year: e.target.value })}
-            />
-            <input
-              type="number"
-              placeholder="Printed count"
-              value={formLit.printed_count}
-              onChange={(e) =>
-                setFormLit({ ...formLit, printed_count: e.target.value })
-              }
-            />
+              <input
+                type="number"
+                placeholder="Year"
+                value={formLit.year}
+                onChange={(e) =>
+                  setFormLit({ ...formLit, year: e.target.value })
+                }
+              />
+              <input
+                type="number"
+                placeholder="Printed count"
+                value={formLit.printed_count}
+                onChange={(e) =>
+                  setFormLit({ ...formLit, printed_count: e.target.value })
+                }
+              />
 
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} />
 
-            <button type="submit">Save</button>
-            <button onClick={() => setOpenForm(false)}>cancel</button>
-          </form>
+              <button type="submit">Save</button>
+              <button onClick={() => setOpenForm(false)}>cancel</button>
+            </form>
+          </div>
         )}
       </div>
 

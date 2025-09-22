@@ -127,73 +127,73 @@ const AdminsOwner = () => {
           setEditingId(null)
         }}
       >
-        {openedAdminform ? 'Закрыть форму' : 'Добавить администратора'}
+        Добавить администратора
       </button>
 
       {openedAdminform && (
-        <div className="form-container">
-          <form
-            className="admin-form"
-            onSubmit={editingId ? handleEditAdmin : handleAddAdmin}
-          >
-            <input
-              type="text"
-              placeholder="Email"
-              value={formAdmin.email}
-              onChange={(e) =>
-                setFormAdmin({ ...formAdmin, email: e.target.value })
-              }
-              required
-            />
-            <input
-              type="password"
-              placeholder="Пароль"
-              value={formAdmin.password}
-              onChange={(e) =>
-                setFormAdmin({ ...formAdmin, password: e.target.value })
-              }
-              required={!editingId}
-            />
-
-            <select
-              value={formAdmin.role}
-              onChange={(e) =>
-                setFormAdmin({ ...formAdmin, role: e.target.value })
-              }
+        <div className="modal-overlay">
+            <form
+              className="admin-form"
+              onSubmit={editingId ? handleEditAdmin : handleAddAdmin}
             >
-              <option value="superadmin">Superadmin</option>
-              <option value="owner">Owner</option>
-            </select>
+              <input
+                type="text"
+                placeholder="Email"
+                value={formAdmin.email}
+                onChange={(e) =>
+                  setFormAdmin({ ...formAdmin, email: e.target.value })
+                }
+                required
+              />
+              <input
+                type="password"
+                placeholder="Пароль"
+                value={formAdmin.password}
+                onChange={(e) =>
+                  setFormAdmin({ ...formAdmin, password: e.target.value })
+                }
+                required={!editingId}
+              />
 
-            <select
-              value={formAdmin.university_id}
-              onChange={(e) =>
-                setFormAdmin({ ...formAdmin, university_id: e.target.value })
-              }
-            >
-              <option value="">Выберите университет</option>
-              {universities.map((u) => (
-                <option key={u.id} value={u.id}>
-                  {u.name}
-                </option>
-              ))}
-            </select>
+              <select
+                value={formAdmin.role}
+                onChange={(e) =>
+                  setFormAdmin({ ...formAdmin, role: e.target.value })
+                }
+              >
+                <option value="superadmin">Superadmin</option>
+                <option value="owner">Owner</option>
+              </select>
 
-            <div className="form-actions">
-              <button type="submit">
-                {editingId ? 'Сохранить изменения' : 'Добавить'}
-              </button>
-              <button type="button" onClick={resetForm}>
-                Отмена
-              </button>
-            </div>
-          </form>
-        </div>
+              <select
+                value={formAdmin.university_id}
+                onChange={(e) =>
+                  setFormAdmin({ ...formAdmin, university_id: e.target.value })
+                }
+              >
+                <option value="">Выберите университет</option>
+                {universities.map((u) => (
+                  <option key={u.id} value={u.id}>
+                    {u.name}
+                  </option>
+                ))}
+              </select>
+
+              <div className="form-actions">
+                <button type="submit">
+                  {editingId ? 'Сохранить изменения' : 'Добавить'}
+                </button>
+                <button type="button" onClick={resetForm}>
+                  Отмена
+                </button>
+              </div>
+            </form>
+          </div>
       )}
 
       <div className="filter-block">
         <label>
-          Фильтр по университету:{' '}
+          Фильтр по университету:
           <select
             value={selectedUniver}
             onChange={(e) => setSelectedUniver(e.target.value)}

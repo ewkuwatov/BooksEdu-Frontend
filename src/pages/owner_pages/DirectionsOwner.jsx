@@ -130,7 +130,7 @@ const DirectionsOwner = () => {
       </button>
 
       {openedDirForm && (
-        <div className="form-container">
+        <div className="modal-overlay">
           <form
             className="directions-form"
             onSubmit={editingId ? handleEditDirection : handleAddDirections}

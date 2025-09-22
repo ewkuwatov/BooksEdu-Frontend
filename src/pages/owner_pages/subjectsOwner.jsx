@@ -47,6 +47,17 @@ const SubjectsOwner = () => {
     fetchData()
   }, [user])
 
+  const resetForm = () => {
+    setSubjectsForm([
+      {
+        name: '',
+        kafedra_id: '',
+        direction_ids: [],
+        university_id: '',
+      },
+    ])
+  }
+
   const filteredSubjects = useMemo(() => {
     return selectUniver === null
       ? subjects
@@ -136,102 +147,119 @@ const SubjectsOwner = () => {
       </button>
 
       {openForm && (
-        <form className="subjects-form" onSubmit={handleSubmit}>
-          {subjectsForm.map((subj, index) => {
-            const availableKafedras = kafedras.filter(
-              (k) => k.university_id === subj.university_id
-            )
-            const availableDirections = directions.filter(
-              (d) => d.university_id === subj.university_id
-            )
+        <div className="modal-overlay">
+          <form className="subjects-form" onSubmit={handleSubmit}>
+            {subjectsForm.map((subj, index) => {
+              const availableKafedras = kafedras.filter(
+                (k) => k.university_id === subj.university_id
+              )
+              const availableDirections = directions.filter(
+                (d) => d.university_id === subj.university_id
+              )
 
-            return (
-              <div key={index} className="subject-item">
-                <input
-                  type="text"
-                  className="subject-input"
-                  placeholder="Название предмета"
-                  value={subj.name}
-                  onChange={(e) => handleChange(index, 'name', e.target.value)}
-                />
+              return (
+                <div key={index} className="subject-item">
+                  <input
+                    type="text"
+                    className="subject-input"
+                    placeholder="Название предмета"
+                    value={subj.name}
+                    onChange={(e) =>
+                      handleChange(index, 'name', e.target.value)
+                    }
+                  />
 
-                <select
-                  className="subject-select"
-                  value={subj.university_id}
-                  onChange={(e) =>
-                    handleChange(index, 'university_id', Number(e.target.value))
-                  }
-                >
-                  <option value="">Выбери университет</option>
-                  {universities.map((u) => (
-                    <option key={u.id} value={u.id}>
-                      {u.name}
-                    </option>
-                  ))}
-                </select>
+                  <select
+                    className="subject-select"
+                    value={subj.university_id}
+                    onChange={(e) =>
+                      handleChange(
+                        index,
+                        'university_id',
+                        Number(e.target.value)
+                      )
+                    }
+                  >
+                    <option value="">Выбери университет</option>
+                    {universities.map((u) => (
+                      <option key={u.id} value={u.id}>
+                        {u.name}
+                      </option>
+                    ))}
+                  </select>
 
-                <select
-                  className="subject-select"
-                  value={subj.kafedra_id}
-                  onChange={(e) =>
-                    handleChange(index, 'kafedra_id', Number(e.target.value))
-                  }
-                  disabled={!subj.university_id}
-                >
-                  <option value="">Выбери кафедру</option>
-                  {availableKafedras.map((k) => (
-                    <option key={k.id} value={k.id}>
-                      {k.name}
-                    </option>
-                  ))}
-                </select>
-                <div className="direction-checkboxes">
-                  <strong onClick={() => setOpenDirection(!openDirection)}>
-                    Направления:
-                  </strong>
-                  {openDirection && ( // теперь открывается по клику
-                    <ul className="direction-list">
-                      {availableDirections.map((d) => (
-                        <li key={d.id}>
-                          <label className="direction-item">
-                            <input
-                              type="checkbox"
-                              checked={subj.direction_ids.includes(d.id)}
-                              onChange={() => toggleDirection(index, d.id)}
-                            />
-                            {d.name} ({d.course} курс)
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <select
+                    className="subject-select"
+                    value={subj.kafedra_id}
+                    onChange={(e) =>
+                      handleChange(index, 'kafedra_id', Number(e.target.value))
+                    }
+                    disabled={!subj.university_id}
+                  >
+                    <option value="">Выбери кафедру</option>
+                    {availableKafedras.map((k) => (
+                      <option key={k.id} value={k.id}>
+                        {k.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="direction-checkboxes">
+                    <strong
+                      className="directionBtn"
+                      onClick={() => setOpenDirection(!openDirection)}
+                    >
+                      Направления
+                    </strong>
+                    {openDirection && ( // теперь открывается по клику
+                      <ul className="direction-list">
+                        {availableDirections.map((d) => (
+                          <li key={d.id}>
+                            <label className="direction-item">
+                              <input
+                                type="checkbox"
+                                checked={subj.direction_ids.includes(d.id)}
+                                onChange={() => toggleDirection(index, d.id)}
+                              />
+                              <span>
+                                {d.name} ({d.course} курс)
+                              </span>
+                            </label>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
 
-          <div className="form-actions">
-            {subjectsForm.length < 10 && (
+            <div className="form-actions">
+              {subjectsForm.length < 10 && (
+                <button
+                  type="button"
+                  className="primary-btn"
+                  onClick={addSubjectField}
+                >
+                  + Добавить ещё
+                </button>
+              )}
+              <button type="submit" className="success-btn">
+                Сохранить
+              </button>
               <button
                 type="button"
-                className="primary-btn"
-                onClick={addSubjectField}
+                className="cancel-btn"
+                onClick={() => {
+                  setOpenForm(false)
+                  setOpenDirection(false)
+                  resetForm()
+                }}
               >
-                + Добавить ещё
+                Cancel
               </button>
-            )}
-            <button type="submit" className="success-btn">
-              Сохранить
-            </button>
-            <button
-              type="button"
-              className="cancel-btn"
-              onClick={() => setOpenForm(false)}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       )}
 
       {/* Фильтрация по университету */}
