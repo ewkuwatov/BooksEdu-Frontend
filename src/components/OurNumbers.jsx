@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import general_statsApi from '../service/general_stats'
 import img from '../assets/b64d65c9f5815f60cbae1a4fca79bb34.jpeg'
 
-import '../styles/OurNumbers.css'
+import '../styles/ourNumbers.css'
 
 
 const OurNumbers = () => {
