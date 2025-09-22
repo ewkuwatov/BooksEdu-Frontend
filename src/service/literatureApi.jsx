@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/literatures',
+  baseURL: 'https://booksedu-backend-1.onrender.com/literatures',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

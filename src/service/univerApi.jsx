@@ -5,7 +5,7 @@ import axios from 'axios'
 // Создаём экземпляр axios
 // =======================
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/universities',
+  baseURL: 'https://booksedu-backend-1.onrender.com/universities',
   withCredentials: true, // для HttpOnly cookie (refresh_token)
   headers: {
     'Content-Type': 'application/json',
