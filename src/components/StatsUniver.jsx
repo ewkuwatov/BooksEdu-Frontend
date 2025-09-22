@@ -7,7 +7,7 @@ import statisticsApi from '../service/statisticsApi'
 
 const UniversitiesStats = () => {
   const { t } = useTranslation()
-  const { user } = useContext(AuthContext)
+  const { user, accessToken } = useContext(AuthContext)
   const [stats, setStats] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -21,7 +21,7 @@ const UniversitiesStats = () => {
       }
 
       try {
-        const data = await getUniversitiesStats()
+        const data = await getUniversitiesStats(accessToken)
         setStats(data)
       } catch (err) {
         setError(err.message)
@@ -31,11 +31,11 @@ const UniversitiesStats = () => {
     }
 
     fetchStats()
-  }, [user, t])
+  }, [user, accessToken, t])
 
   const handleDownloadStatistics = async () => {
     try {
-      const blob = await statisticsApi.exportStatistics()
+      const blob = await statisticsApi.exportStatistics(accessToken)
       const url = window.URL.createObjectURL(new Blob([blob]))
       const link = document.createElement('a')
       link.href = url

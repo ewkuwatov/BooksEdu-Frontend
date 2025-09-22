@@ -8,7 +8,7 @@ import '../styles/Universities.css'
 import logo from '../assets/logo.png'
 
 const Universities = () => {
-  const { user } = useContext(AuthContext)
+  const { user, accessToken } = useContext(AuthContext)
   const [universities, setUniversities] = useState([])
   const [stats, setStats] = useState([])
   const [loading, setLoading] = useState(true)
@@ -35,16 +35,19 @@ const Universities = () => {
             setError('Не указан university_id для superadmin')
             return
           }
-          data = await univerApi.getUniversities(user.token)
-          const dataSt = await getUniversitiesStats()
+          data = await univerApi.getUniversities(accessToken)
+          const dataSt = await getUniversitiesStats(accessToken)
+
           setStats(dataSt)
         } else if (user.role === 'owner') {
-          data = await univerApi.getUniversities(user.token)
-          const dataSt = await getUniversitiesStats()
+          data = await univerApi.getUniversities(accessToken)
+          const dataSt = await getUniversitiesStats(accessToken)
+
           setStats(dataSt)
         } else if (user.role === 'user') {
-          data = await univerApi.getUniversities(user.token)
-          const dataSt = await getUniversitiesStats()
+          data = await univerApi.getUniversities(accessToken)
+          const dataSt = await getUniversitiesStats(accessToken)
+
           setStats(dataSt)
         } else {
           setError('Доступ запрещён для этой роли')
@@ -61,7 +64,7 @@ const Universities = () => {
     }
 
     fetchUniversities()
-  }, [user])
+  }, [user, accessToken])
 
   if (!user) return <p>Пользователь не авторизован</p>
   if (loading) return <p>Загрузка университетов...</p>
