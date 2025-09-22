@@ -21,7 +21,6 @@ import DirectionAdmin from './pages/admin_pages/DirectionAdmin'
 import KafedraAdmin from './pages/admin_pages/KafedraAdmin'
 import SubjectsAdmin from './pages/admin_pages/SubjectsAdmin'
 import LiteratureAdmin from './pages/admin_pages/LiteratureAdmin'
-import Tr from './pages/Tr'
 import InProcess from './components/InProcess'
 
 // новые
@@ -33,7 +32,7 @@ import AdminLayout from './pages/AdminLayout'
 import Footer from './components/Footer'
 import NewsOwner from './pages/owner_pages/NewsOwner'
 import NewsPage from './pages/NewsPage'
-import NewsAdmin from './pages/admin_pages/newsAdmin'
+import NewsAdmin from './pages/admin_pages/NewsAdmin'
 import NewsPages from './pages/NewsPages'
 import OnlineTests from './pages/OnlineTest'
 import Articles from './pages/Articles'
@@ -206,7 +205,6 @@ function App() {
             />
 
             {/* Other */}
-            <Route path="/tr" element={<Tr />} />
             <Route path="/forbidden" element={<Forbidden />} />
           </Routes>
         </Router>
